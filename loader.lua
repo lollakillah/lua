@@ -3,6 +3,12 @@
     Quick load script for the hub
 ]]
 
+-- Prevent double loading
+if getgenv().InovoProductionsLoaded then
+    warn("Inovoproductions is already loaded!")
+    return
+end
+
 -- Loading screen
 local LoadingScreen = Instance.new("ScreenGui")
 LoadingScreen.Name = "InovoLoader"
@@ -101,12 +107,24 @@ end
 updateProgress(1, "Complete!")
 wait(0.5)
 
--- Remove loading screen
-TweenService:Create(LoadingFrame, TweenInfo.new(0.3), {
+-- Mark as loaded
+getgenv().InovoProductionsLoaded = true
+
+-- Remove loading screen with smooth fade
+TweenService:Create(LoadingFrame, TweenInfo.new(0.4, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
     Size = UDim2.new(0, 0, 0, 0),
-    Position = UDim2.new(0.5, 0, 0.5, 0)
+    Position = UDim2.new(0.5, 0, 0.5, 0),
+    BackgroundTransparency = 1
 }):Play()
 
-wait(0.3)
+TweenService:Create(Title, TweenInfo.new(0.3), {
+    TextTransparency = 1
+}):Play()
+
+TweenService:Create(Status, TweenInfo.new(0.3), {
+    TextTransparency = 1
+}):Play()
+
+wait(0.4)
 LoadingScreen:Destroy()
 

@@ -1,6 +1,11 @@
 -- Inovoproductions UI Library
 -- Modern & Smooth Animation System
 
+-- Prevent double loading
+if getgenv().InovoLibraryLoaded then
+    return getgenv().InovoLibrary
+end
+
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
@@ -21,13 +26,16 @@ Library.Theme = {
     Border = Color3.fromRGB(40, 40, 50)
 }
 
--- Animation Presets
+-- Animation Presets - Ultra Smooth
 Library.Animations = {
-    Fast = TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-    Medium = TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-    Slow = TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-    Bounce = TweenInfo.new(0.4, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
-    Smooth = TweenInfo.new(0.25, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut)
+    UltraFast = TweenInfo.new(0.1, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out),
+    Fast = TweenInfo.new(0.2, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out),
+    Medium = TweenInfo.new(0.35, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out),
+    Slow = TweenInfo.new(0.5, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out),
+    Bounce = TweenInfo.new(0.6, Enum.EasingStyle.Elastic, Enum.EasingDirection.Out),
+    Spring = TweenInfo.new(0.5, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+    Smooth = TweenInfo.new(0.3, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut),
+    Silk = TweenInfo.new(0.4, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut)
 }
 
 function Library:CreateWindow(config)
@@ -40,7 +48,7 @@ function Library:CreateWindow(config)
     ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     ScreenGui.Parent = game:GetService("CoreGui")
     
-    -- Main Frame
+    -- Main Frame with glassmorphism
     local MainFrame = Instance.new("Frame")
     MainFrame.Name = "MainFrame"
     MainFrame.Size = UDim2.new(0, 0, 0, 0)
@@ -53,8 +61,25 @@ function Library:CreateWindow(config)
     
     -- Add rounded corners
     local UICorner = Instance.new("UICorner")
-    UICorner.CornerRadius = UDim.new(0, 12)
+    UICorner.CornerRadius = UDim.new(0, 16)
     UICorner.Parent = MainFrame
+    
+    -- Glassmorphism effect with gradient
+    local GlassGradient = Instance.new("UIGradient")
+    GlassGradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(20, 20, 28)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(15, 15, 20))
+    }
+    GlassGradient.Rotation = 45
+    GlassGradient.Parent = MainFrame
+    
+    -- Border glow effect
+    local BorderGlow = Instance.new("UIStroke")
+    BorderGlow.Color = Library.Theme.Accent
+    BorderGlow.Thickness = 1
+    BorderGlow.Transparency = 0.5
+    BorderGlow.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    BorderGlow.Parent = MainFrame
     
     -- Drop shadow effect
     local Shadow = Instance.new("ImageLabel")
@@ -70,36 +95,132 @@ function Library:CreateWindow(config)
     Shadow.ZIndex = -1
     Shadow.Parent = MainFrame
     
-    -- Top Bar
+    -- Top Bar with gradient
     local TopBar = Instance.new("Frame")
     TopBar.Name = "TopBar"
-    TopBar.Size = UDim2.new(1, 0, 0, 50)
+    TopBar.Size = UDim2.new(1, 0, 0, 60)
     TopBar.BackgroundColor3 = Library.Theme.Secondary
     TopBar.BorderSizePixel = 0
     TopBar.Parent = MainFrame
     
     local TopBarCorner = Instance.new("UICorner")
-    TopBarCorner.CornerRadius = UDim.new(0, 12)
+    TopBarCorner.CornerRadius = UDim.new(0, 16)
     TopBarCorner.Parent = TopBar
     
-    -- Title
+    -- Top bar gradient for depth
+    local TopBarGradient = Instance.new("UIGradient")
+    TopBarGradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(30, 30, 42)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(25, 25, 35))
+    }
+    TopBarGradient.Rotation = 90
+    TopBarGradient.Parent = TopBar
+    
+    -- Accent line under top bar
+    local AccentLine = Instance.new("Frame")
+    AccentLine.Name = "AccentLine"
+    AccentLine.Size = UDim2.new(1, -20, 0, 2)
+    AccentLine.Position = UDim2.new(0, 10, 1, -3)
+    AccentLine.BackgroundColor3 = Library.Theme.Accent
+    AccentLine.BorderSizePixel = 0
+    AccentLine.Parent = TopBar
+    
+    local AccentLineCorner = Instance.new("UICorner")
+    AccentLineCorner.CornerRadius = UDim.new(1, 0)
+    AccentLineCorner.Parent = AccentLine
+    
+    -- Animated gradient on accent line
+    local AccentLineGradient = Instance.new("UIGradient")
+    AccentLineGradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Library.Theme.Accent),
+        ColorSequenceKeypoint.new(0.5, Library.Theme.AccentHover),
+        ColorSequenceKeypoint.new(1, Library.Theme.Accent)
+    }
+    AccentLineGradient.Parent = AccentLine
+    
+    -- Animate accent line gradient
+    spawn(function()
+        while AccentLine.Parent do
+            TweenService:Create(AccentLineGradient, TweenInfo.new(3, Enum.EasingStyle.Linear), {
+                Offset = Vector2.new(1, 0)
+            }):Play()
+            wait(3)
+            AccentLineGradient.Offset = Vector2.new(-1, 0)
+        end
+    end)
+    
+    -- Logo icon (emoji/symbol)
+    local Logo = Instance.new("TextLabel")
+    Logo.Name = "Logo"
+    Logo.Size = UDim2.new(0, 40, 0, 40)
+    Logo.Position = UDim2.new(0, 10, 0, 10)
+    Logo.BackgroundColor3 = Library.Theme.Accent
+    Logo.Text = "IP"
+    Logo.TextColor3 = Library.Theme.Text
+    Logo.TextSize = 16
+    Logo.Font = Enum.Font.GothamBold
+    Logo.BorderSizePixel = 0
+    Logo.Parent = TopBar
+    
+    local LogoCorner = Instance.new("UICorner")
+    LogoCorner.CornerRadius = UDim.new(0, 10)
+    LogoCorner.Parent = Logo
+    
+    local LogoGradient = Instance.new("UIGradient")
+    LogoGradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Library.Theme.Accent),
+        ColorSequenceKeypoint.new(1, Library.Theme.AccentHover)
+    }
+    LogoGradient.Rotation = 45
+    LogoGradient.Parent = Logo
+    
+    -- Pulsing glow effect on logo
+    spawn(function()
+        while Logo.Parent do
+            TweenService:Create(Logo, TweenInfo.new(2, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {
+                Size = UDim2.new(0, 42, 0, 42),
+                Position = UDim2.new(0, 9, 0, 9)
+            }):Play()
+            wait(2)
+            TweenService:Create(Logo, TweenInfo.new(2, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {
+                Size = UDim2.new(0, 40, 0, 40),
+                Position = UDim2.new(0, 10, 0, 10)
+            }):Play()
+            wait(2)
+        end
+    end)
+    
+    -- Title with gradient text effect
     local Title = Instance.new("TextLabel")
     Title.Name = "Title"
-    Title.Size = UDim2.new(0, 200, 1, 0)
-    Title.Position = UDim2.new(0, 15, 0, 0)
+    Title.Size = UDim2.new(0, 250, 1, -10)
+    Title.Position = UDim2.new(0, 60, 0, 5)
     Title.BackgroundTransparency = 1
     Title.Text = config.Title or "Inovoproductions"
     Title.TextColor3 = Library.Theme.Text
-    Title.TextSize = 18
+    Title.TextSize = 20
     Title.Font = Enum.Font.GothamBold
     Title.TextXAlignment = Enum.TextXAlignment.Left
     Title.Parent = TopBar
     
-    -- Close Button
+    -- Subtitle/version
+    local Subtitle = Instance.new("TextLabel")
+    Subtitle.Name = "Subtitle"
+    Subtitle.Size = UDim2.new(0, 200, 0, 15)
+    Subtitle.Position = UDim2.new(0, 60, 1, -20)
+    Subtitle.BackgroundTransparency = 1
+    Subtitle.Text = "v1.0 • Modern Hub"
+    Subtitle.TextColor3 = Library.Theme.TextDark
+    Subtitle.TextSize = 11
+    Subtitle.Font = Enum.Font.Gotham
+    Subtitle.TextXAlignment = Enum.TextXAlignment.Left
+    Subtitle.Parent = TopBar
+    
+    -- Close Button with gradient
     local CloseButton = Instance.new("TextButton")
     CloseButton.Name = "CloseButton"
     CloseButton.Size = UDim2.new(0, 40, 0, 40)
-    CloseButton.Position = UDim2.new(1, -45, 0, 5)
+    CloseButton.Position = UDim2.new(1, -50, 0, 10)
     CloseButton.BackgroundColor3 = Library.Theme.Error
     CloseButton.Text = "×"
     CloseButton.TextColor3 = Library.Theme.Text
@@ -109,14 +230,22 @@ function Library:CreateWindow(config)
     CloseButton.Parent = TopBar
     
     local CloseCorner = Instance.new("UICorner")
-    CloseCorner.CornerRadius = UDim.new(0, 8)
+    CloseCorner.CornerRadius = UDim.new(0, 10)
     CloseCorner.Parent = CloseButton
     
-    -- Minimize Button
+    local CloseGradient = Instance.new("UIGradient")
+    CloseGradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Library.Theme.Error),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(200, 60, 60))
+    }
+    CloseGradient.Rotation = 45
+    CloseGradient.Parent = CloseButton
+    
+    -- Minimize Button with gradient
     local MinimizeButton = Instance.new("TextButton")
     MinimizeButton.Name = "MinimizeButton"
     MinimizeButton.Size = UDim2.new(0, 40, 0, 40)
-    MinimizeButton.Position = UDim2.new(1, -90, 0, 5)
+    MinimizeButton.Position = UDim2.new(1, -100, 0, 10)
     MinimizeButton.BackgroundColor3 = Library.Theme.Accent
     MinimizeButton.Text = "−"
     MinimizeButton.TextColor3 = Library.Theme.Text
@@ -126,43 +255,86 @@ function Library:CreateWindow(config)
     MinimizeButton.Parent = TopBar
     
     local MinimizeCorner = Instance.new("UICorner")
-    MinimizeCorner.CornerRadius = UDim.new(0, 8)
+    MinimizeCorner.CornerRadius = UDim.new(0, 10)
     MinimizeCorner.Parent = MinimizeButton
     
-    -- Tab Container
+    local MinimizeGradient = Instance.new("UIGradient")
+    MinimizeGradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Library.Theme.Accent),
+        ColorSequenceKeypoint.new(1, Library.Theme.AccentHover)
+    }
+    MinimizeGradient.Rotation = 45
+    MinimizeGradient.Parent = MinimizeButton
+    
+    -- Tab Container with background
     local TabContainer = Instance.new("Frame")
     TabContainer.Name = "TabContainer"
-    TabContainer.Size = UDim2.new(0, 150, 1, -60)
-    TabContainer.Position = UDim2.new(0, 10, 0, 60)
+    TabContainer.Size = UDim2.new(0, 160, 1, -80)
+    TabContainer.Position = UDim2.new(0, 10, 0, 70)
     TabContainer.BackgroundTransparency = 1
     TabContainer.Parent = MainFrame
     
-    -- Content Container
+    -- Add padding
+    local TabPadding = Instance.new("UIPadding")
+    TabPadding.PaddingTop = UDim.new(0, 5)
+    TabPadding.PaddingBottom = UDim.new(0, 5)
+    TabPadding.Parent = TabContainer
+    
+    -- Content Container with modern styling
     local ContentContainer = Instance.new("Frame")
     ContentContainer.Name = "ContentContainer"
-    ContentContainer.Size = UDim2.new(1, -170, 1, -70)
-    ContentContainer.Position = UDim2.new(0, 165, 0, 60)
+    ContentContainer.Size = UDim2.new(1, -190, 1, -90)
+    ContentContainer.Position = UDim2.new(0, 180, 0, 70)
     ContentContainer.BackgroundColor3 = Library.Theme.Secondary
     ContentContainer.BorderSizePixel = 0
     ContentContainer.Parent = MainFrame
     
     local ContentCorner = Instance.new("UICorner")
-    ContentCorner.CornerRadius = UDim.new(0, 10)
+    ContentCorner.CornerRadius = UDim.new(0, 12)
     ContentCorner.Parent = ContentContainer
     
-    -- Dragging functionality
+    -- Content gradient
+    local ContentGradient = Instance.new("UIGradient")
+    ContentGradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(28, 28, 38)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(25, 25, 35))
+    }
+    ContentGradient.Rotation = 135
+    ContentGradient.Parent = ContentContainer
+    
+    -- Subtle border
+    local ContentStroke = Instance.new("UIStroke")
+    ContentStroke.Color = Library.Theme.Border
+    ContentStroke.Thickness = 1
+    ContentStroke.Transparency = 0.7
+    ContentStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    ContentStroke.Parent = ContentContainer
+    
+    -- Smooth dragging functionality with momentum
     local dragging = false
     local dragInput, mousePos, framePos
+    local lastDragTime = tick()
+    local velocity = Vector2.new(0, 0)
     
     TopBar.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 then
             dragging = true
             mousePos = input.Position
             framePos = MainFrame.Position
+            velocity = Vector2.new(0, 0)
+            
+            -- Scale effect on grab
+            TweenService:Create(MainFrame, Library.Animations.UltraFast, {
+                Size = UDim2.new(0, 645, 0, 445)
+            }):Play()
             
             input.Changed:Connect(function()
                 if input.UserInputState == Enum.UserInputState.End then
                     dragging = false
+                    -- Scale back on release
+                    TweenService:Create(MainFrame, Library.Animations.Spring, {
+                        Size = UDim2.new(0, 650, 0, 450)
+                    }):Play()
                 end
             end)
         end
@@ -177,73 +349,148 @@ function Library:CreateWindow(config)
     UserInputService.InputChanged:Connect(function(input)
         if input == dragInput and dragging then
             local delta = input.Position - mousePos
-            TweenService:Create(MainFrame, Library.Animations.Fast, {
-                Position = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
-            }):Play()
+            local currentTime = tick()
+            local deltaTime = currentTime - lastDragTime
+            
+            if deltaTime > 0 then
+                velocity = delta / deltaTime
+            end
+            
+            lastDragTime = currentTime
+            
+            -- Ultra smooth dragging without tween
+            MainFrame.Position = UDim2.new(
+                framePos.X.Scale, 
+                framePos.X.Offset + delta.X, 
+                framePos.Y.Scale, 
+                framePos.Y.Offset + delta.Y
+            )
         end
     end)
     
-    -- Close button functionality
+    -- Close button functionality with smooth fade out
     CloseButton.MouseButton1Click:Connect(function()
-        TweenService:Create(CloseButton, Library.Animations.Fast, {
+        TweenService:Create(CloseButton, Library.Animations.UltraFast, {
             BackgroundColor3 = Library.Theme.Error:lerp(Color3.new(0, 0, 0), 0.3)
         }):Play()
         
-        wait(0.1)
+        -- Smooth scale down and fade
+        local closeTween = TweenService:Create(MainFrame, Library.Animations.Medium, {
+            Size = UDim2.new(0, 0, 0, 0),
+            BackgroundTransparency = 1
+        })
+        closeTween:Play()
         
-        TweenService:Create(MainFrame, Library.Animations.Medium, {
-            Size = UDim2.new(0, 0, 0, 0)
-        }):Play()
+        -- Fade out all children
+        for _, child in ipairs(MainFrame:GetDescendants()) do
+            if child:IsA("GuiObject") then
+                TweenService:Create(child, Library.Animations.Fast, {
+                    BackgroundTransparency = 1
+                }):Play()
+                if child:IsA("TextLabel") or child:IsA("TextButton") then
+                    TweenService:Create(child, Library.Animations.Fast, {
+                        TextTransparency = 1
+                    }):Play()
+                end
+            end
+        end
         
-        wait(0.3)
+        closeTween.Completed:Wait()
         ScreenGui:Destroy()
     end)
     
-    -- Minimize functionality
+    -- Minimize functionality with elastic bounce
     local minimized = false
     MinimizeButton.MouseButton1Click:Connect(function()
         minimized = not minimized
         
         if minimized then
-            TweenService:Create(MainFrame, Library.Animations.Smooth, {
+            -- Smooth collapse
+            TweenService:Create(MainFrame, Library.Animations.Silk, {
                 Size = UDim2.new(0, 300, 0, 50)
             }):Play()
+            TweenService:Create(MinimizeButton, Library.Animations.UltraFast, {
+                Rotation = 180
+            }):Play()
         else
+            -- Elastic expand
             TweenService:Create(MainFrame, Library.Animations.Bounce, {
                 Size = UDim2.new(0, 650, 0, 450)
+            }):Play()
+            TweenService:Create(MinimizeButton, Library.Animations.UltraFast, {
+                Rotation = 0
             }):Play()
         end
     end)
     
-    -- Hover effects
+    -- Ultra smooth hover effects with scale
     CloseButton.MouseEnter:Connect(function()
-        TweenService:Create(CloseButton, Library.Animations.Fast, {
-            BackgroundColor3 = Library.Theme.Error:lerp(Color3.new(1, 1, 1), 0.1)
+        TweenService:Create(CloseButton, Library.Animations.UltraFast, {
+            BackgroundColor3 = Library.Theme.Error:lerp(Color3.new(1, 1, 1), 0.2),
+            Size = UDim2.new(0, 42, 0, 42)
         }):Play()
     end)
     
     CloseButton.MouseLeave:Connect(function()
-        TweenService:Create(CloseButton, Library.Animations.Fast, {
-            BackgroundColor3 = Library.Theme.Error
+        TweenService:Create(CloseButton, Library.Animations.UltraFast, {
+            BackgroundColor3 = Library.Theme.Error,
+            Size = UDim2.new(0, 40, 0, 40)
         }):Play()
     end)
     
     MinimizeButton.MouseEnter:Connect(function()
-        TweenService:Create(MinimizeButton, Library.Animations.Fast, {
-            BackgroundColor3 = Library.Theme.AccentHover
+        TweenService:Create(MinimizeButton, Library.Animations.UltraFast, {
+            BackgroundColor3 = Library.Theme.AccentHover,
+            Size = UDim2.new(0, 42, 0, 42)
         }):Play()
     end)
     
     MinimizeButton.MouseLeave:Connect(function()
-        TweenService:Create(MinimizeButton, Library.Animations.Fast, {
-            BackgroundColor3 = Library.Theme.Accent
+        TweenService:Create(MinimizeButton, Library.Animations.UltraFast, {
+            BackgroundColor3 = Library.Theme.Accent,
+            Size = UDim2.new(0, 40, 0, 40)
         }):Play()
     end)
     
-    -- Open animation
-    TweenService:Create(MainFrame, Library.Animations.Bounce, {
+    -- Smooth fade-in effect
+    MainFrame.BackgroundTransparency = 1
+    for _, child in ipairs(MainFrame:GetDescendants()) do
+        if child:IsA("GuiObject") then
+            child.BackgroundTransparency = 1
+            if child:IsA("TextLabel") or child:IsA("TextButton") then
+                child.TextTransparency = 1
+            end
+        end
+    end
+    
+    -- Open animation with spring effect
+    local openTween = TweenService:Create(MainFrame, Library.Animations.Spring, {
         Size = UDim2.new(0, 650, 0, 450)
+    })
+    openTween:Play()
+    
+    -- Fade in background
+    wait(0.1)
+    TweenService:Create(MainFrame, Library.Animations.Medium, {
+        BackgroundTransparency = 0
     }):Play()
+    
+    -- Fade in all children with stagger effect
+    for i, child in ipairs(MainFrame:GetDescendants()) do
+        if child:IsA("GuiObject") then
+            spawn(function()
+                wait(i * 0.01)
+                TweenService:Create(child, Library.Animations.Fast, {
+                    BackgroundTransparency = child.Name == "Shadow" and 0.7 or (child.BackgroundTransparency == 1 and 0 or child.BackgroundTransparency)
+                }):Play()
+                if child:IsA("TextLabel") or child:IsA("TextButton") then
+                    TweenService:Create(child, Library.Animations.Fast, {
+                        TextTransparency = 0
+                    }):Play()
+                end
+            end)
+        end
+    end
     
     Window.ScreenGui = ScreenGui
     Window.MainFrame = MainFrame
@@ -256,19 +503,43 @@ function Library:CreateWindow(config)
         local Tab = {}
         local TabButton = Instance.new("TextButton")
         TabButton.Name = name
-        TabButton.Size = UDim2.new(1, -10, 0, 40)
-        TabButton.Position = UDim2.new(0, 0, 0, #self.Tabs * 45)
+        TabButton.Size = UDim2.new(1, 0, 0, 45)
+        TabButton.Position = UDim2.new(0, 0, 0, #self.Tabs * 50)
         TabButton.BackgroundColor3 = Library.Theme.Secondary
-        TabButton.Text = name
+        TabButton.Text = "  " .. name
         TabButton.TextColor3 = Library.Theme.TextDark
         TabButton.TextSize = 14
-        TabButton.Font = Enum.Font.GothamMedium
+        TabButton.Font = Enum.Font.GothamSemibold
         TabButton.BorderSizePixel = 0
+        TabButton.TextXAlignment = Enum.TextXAlignment.Left
         TabButton.Parent = self.TabContainer
         
         local TabCorner = Instance.new("UICorner")
-        TabCorner.CornerRadius = UDim.new(0, 8)
+        TabCorner.CornerRadius = UDim.new(0, 10)
         TabCorner.Parent = TabButton
+        
+        -- Tab button gradient
+        local TabGradient = Instance.new("UIGradient")
+        TabGradient.Color = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, Color3.fromRGB(30, 30, 40)),
+            ColorSequenceKeypoint.new(1, Color3.fromRGB(25, 25, 35))
+        }
+        TabGradient.Rotation = 90
+        TabGradient.Transparency = NumberSequence.new(1)
+        TabGradient.Parent = TabButton
+        
+        -- Selection indicator
+        local SelectionBar = Instance.new("Frame")
+        SelectionBar.Name = "SelectionBar"
+        SelectionBar.Size = UDim2.new(0, 0, 1, -10)
+        SelectionBar.Position = UDim2.new(0, 0, 0, 5)
+        SelectionBar.BackgroundColor3 = Library.Theme.Accent
+        SelectionBar.BorderSizePixel = 0
+        SelectionBar.Parent = TabButton
+        
+        local SelectionCorner = Instance.new("UICorner")
+        SelectionCorner.CornerRadius = UDim.new(0, 4)
+        SelectionCorner.Parent = SelectionBar
         
         local TabContent = Instance.new("ScrollingFrame")
         TabContent.Name = name .. "Content"
@@ -292,35 +563,117 @@ function Library:CreateWindow(config)
         
         TabButton.MouseButton1Click:Connect(function()
             for _, tab in pairs(self.Tabs) do
-                TweenService:Create(tab.Button, Library.Animations.Fast, {
+                local btn = tab.Button
+                local selBar = btn:FindFirstChild("SelectionBar")
+                local grad = btn:FindFirstChild("UIGradient")
+                
+                TweenService:Create(btn, Library.Animations.UltraFast, {
                     BackgroundColor3 = Library.Theme.Secondary,
                     TextColor3 = Library.Theme.TextDark
                 }):Play()
-                tab.Content.Visible = false
+                
+                if selBar then
+                    TweenService:Create(selBar, Library.Animations.Fast, {
+                        Size = UDim2.new(0, 0, 1, -10)
+                    }):Play()
+                end
+                
+                if grad then
+                    TweenService:Create(grad, Library.Animations.Fast, {
+                        Transparency = NumberSequence.new(1)
+                    }):Play()
+                end
+                
+                -- Smooth fade out content
+                if tab.Content.Visible then
+                    for _, child in ipairs(tab.Content:GetChildren()) do
+                        if child:IsA("GuiObject") then
+                            TweenService:Create(child, Library.Animations.UltraFast, {
+                                BackgroundTransparency = 1,
+                                TextTransparency = 1
+                            }):Play()
+                        end
+                    end
+                    wait(0.1)
+                    tab.Content.Visible = false
+                end
             end
             
+            -- Animate selection bar
+            local selectionBar = TabButton:FindFirstChild("SelectionBar")
+            if selectionBar then
+                TweenService:Create(selectionBar, Library.Animations.Spring, {
+                    Size = UDim2.new(0, 4, 1, -10)
+                }):Play()
+            end
+            
+            -- Button color and gradient
             TweenService:Create(TabButton, Library.Animations.Fast, {
-                BackgroundColor3 = Library.Theme.Accent,
+                BackgroundColor3 = Library.Theme.Border,
                 TextColor3 = Library.Theme.Text
             }):Play()
             
+            local tabGradient = TabButton:FindFirstChild("UIGradient")
+            if tabGradient then
+                TweenService:Create(tabGradient, Library.Animations.Fast, {
+                    Transparency = NumberSequence.new(0)
+                }):Play()
+            end
+            
+            -- Smooth fade in content
             TabContent.Visible = true
+            for i, child in ipairs(TabContent:GetChildren()) do
+                if child:IsA("GuiObject") then
+                    child.BackgroundTransparency = 1
+                    if child:IsA("TextLabel") or child:IsA("TextButton") then
+                        child.TextTransparency = 1
+                    end
+                    spawn(function()
+                        wait(i * 0.02)
+                        TweenService:Create(child, Library.Animations.Fast, {
+                            BackgroundTransparency = 0
+                        }):Play()
+                        if child:IsA("TextLabel") or child:IsA("TextButton") then
+                            TweenService:Create(child, Library.Animations.Fast, {
+                                TextTransparency = 0
+                            }):Play()
+                        end
+                    end)
+                end
+            end
+            
             self.CurrentTab = Tab
         end)
         
         TabButton.MouseEnter:Connect(function()
             if self.CurrentTab ~= Tab then
-                TweenService:Create(TabButton, Library.Animations.Fast, {
-                    BackgroundColor3 = Library.Theme.Border
+                TweenService:Create(TabButton, Library.Animations.UltraFast, {
+                    BackgroundColor3 = Library.Theme.Border,
+                    TextColor3 = Library.Theme.Text
                 }):Play()
+                
+                local selBar = TabButton:FindFirstChild("SelectionBar")
+                if selBar then
+                    TweenService:Create(selBar, Library.Animations.UltraFast, {
+                        Size = UDim2.new(0, 2, 1, -10)
+                    }):Play()
+                end
             end
         end)
         
         TabButton.MouseLeave:Connect(function()
             if self.CurrentTab ~= Tab then
-                TweenService:Create(TabButton, Library.Animations.Fast, {
-                    BackgroundColor3 = Library.Theme.Secondary
+                TweenService:Create(TabButton, Library.Animations.UltraFast, {
+                    BackgroundColor3 = Library.Theme.Secondary,
+                    TextColor3 = Library.Theme.TextDark
                 }):Play()
+                
+                local selBar = TabButton:FindFirstChild("SelectionBar")
+                if selBar then
+                    TweenService:Create(selBar, Library.Animations.UltraFast, {
+                        Size = UDim2.new(0, 0, 1, -10)
+                    }):Play()
+                end
             end
         end)
         
@@ -331,43 +684,99 @@ function Library:CreateWindow(config)
         function Tab:AddButton(text, callback)
             local Button = Instance.new("TextButton")
             Button.Name = text
-            Button.Size = UDim2.new(1, -10, 0, 35)
+            Button.Size = UDim2.new(1, -10, 0, 38)
             Button.BackgroundColor3 = Library.Theme.Border
             Button.Text = text
             Button.TextColor3 = Library.Theme.Text
             Button.TextSize = 13
-            Button.Font = Enum.Font.Gotham
+            Button.Font = Enum.Font.GothamMedium
             Button.BorderSizePixel = 0
             Button.Parent = TabContent
             
             local ButtonCorner = Instance.new("UICorner")
-            ButtonCorner.CornerRadius = UDim.new(0, 6)
+            ButtonCorner.CornerRadius = UDim.new(0, 8)
             ButtonCorner.Parent = Button
             
+            -- Button gradient
+            local ButtonGradient = Instance.new("UIGradient")
+            ButtonGradient.Color = ColorSequence.new{
+                ColorSequenceKeypoint.new(0, Color3.fromRGB(45, 45, 55)),
+                ColorSequenceKeypoint.new(1, Color3.fromRGB(40, 40, 50))
+            }
+            ButtonGradient.Rotation = 90
+            ButtonGradient.Parent = Button
+            
+            -- Subtle border
+            local ButtonStroke = Instance.new("UIStroke")
+            ButtonStroke.Color = Library.Theme.Accent
+            ButtonStroke.Thickness = 0
+            ButtonStroke.Transparency = 0
+            ButtonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+            ButtonStroke.Parent = Button
+            
             Button.MouseButton1Click:Connect(function()
-                TweenService:Create(Button, Library.Animations.Fast, {
-                    BackgroundColor3 = Library.Theme.Accent
+                local stroke = Button:FindFirstChild("UIStroke")
+                
+                -- Press effect with glow
+                TweenService:Create(Button, Library.Animations.UltraFast, {
+                    BackgroundColor3 = Library.Theme.Accent,
+                    Size = UDim2.new(1, -12, 0, 36)
                 }):Play()
                 
-                wait(0.1)
+                if stroke then
+                    TweenService:Create(stroke, Library.Animations.UltraFast, {
+                        Thickness = 2,
+                        Transparency = 0.3
+                    }):Play()
+                end
+                
+                wait(0.08)
                 pcall(callback)
                 
-                wait(0.1)
-                TweenService:Create(Button, Library.Animations.Fast, {
-                    BackgroundColor3 = Library.Theme.Border
+                -- Spring back effect
+                TweenService:Create(Button, Library.Animations.Spring, {
+                    BackgroundColor3 = Library.Theme.Border,
+                    Size = UDim2.new(1, -10, 0, 38)
                 }):Play()
+                
+                if stroke then
+                    TweenService:Create(stroke, Library.Animations.Fast, {
+                        Thickness = 0,
+                        Transparency = 1
+                    }):Play()
+                end
             end)
             
             Button.MouseEnter:Connect(function()
-                TweenService:Create(Button, Library.Animations.Fast, {
-                    BackgroundColor3 = Library.Theme.Secondary
+                local stroke = Button:FindFirstChild("UIStroke")
+                
+                TweenService:Create(Button, Library.Animations.UltraFast, {
+                    BackgroundColor3 = Library.Theme.Secondary,
+                    Size = UDim2.new(1, -8, 0, 40)
                 }):Play()
+                
+                if stroke then
+                    TweenService:Create(stroke, Library.Animations.UltraFast, {
+                        Thickness = 1,
+                        Transparency = 0.5
+                    }):Play()
+                end
             end)
             
             Button.MouseLeave:Connect(function()
-                TweenService:Create(Button, Library.Animations.Fast, {
-                    BackgroundColor3 = Library.Theme.Border
+                local stroke = Button:FindFirstChild("UIStroke")
+                
+                TweenService:Create(Button, Library.Animations.UltraFast, {
+                    BackgroundColor3 = Library.Theme.Border,
+                    Size = UDim2.new(1, -10, 0, 38)
                 }):Play()
+                
+                if stroke then
+                    TweenService:Create(stroke, Library.Animations.UltraFast, {
+                        Thickness = 0,
+                        Transparency = 1
+                    }):Play()
+                end
             end)
             
             table.insert(self.Elements, Button)
@@ -425,12 +834,25 @@ function Library:CreateWindow(config)
             ToggleButton.MouseButton1Click:Connect(function()
                 toggled = not toggled
                 
-                TweenService:Create(ToggleButton, Library.Animations.Fast, {
+                -- Smooth color transition
+                TweenService:Create(ToggleButton, Library.Animations.Silk, {
                     BackgroundColor3 = toggled and Library.Theme.Success or Library.Theme.Secondary
                 }):Play()
                 
-                TweenService:Create(Circle, Library.Animations.Smooth, {
-                    Position = toggled and UDim2.new(1, -18, 0.5, -8) or UDim2.new(0, 2, 0.5, -8)
+                -- Elastic circle movement
+                TweenService:Create(Circle, Library.Animations.Spring, {
+                    Position = toggled and UDim2.new(1, -18, 0.5, -8) or UDim2.new(0, 2, 0.5, -8),
+                    Size = toggled and UDim2.new(0, 16, 0, 16) or UDim2.new(0, 16, 0, 16)
+                }):Play()
+                
+                -- Squeeze effect during transition
+                TweenService:Create(Circle, Library.Animations.UltraFast, {
+                    Size = UDim2.new(0, 14, 0, 18)
+                }):Play()
+                
+                wait(0.1)
+                TweenService:Create(Circle, Library.Animations.Spring, {
+                    Size = UDim2.new(0, 16, 0, 16)
                 }):Play()
                 
                 pcall(callback, toggled)
@@ -604,10 +1026,20 @@ function Library:Notification(text, duration)
     NotificationFrame.AnchorPoint = Vector2.new(1, 0)
     NotificationFrame.BackgroundColor3 = Library.Theme.Secondary
     NotificationFrame.BorderSizePixel = 0
+    NotificationFrame.BackgroundTransparency = 0.1
     
     local NotificationCorner = Instance.new("UICorner")
-    NotificationCorner.CornerRadius = UDim.new(0, 8)
+    NotificationCorner.CornerRadius = UDim.new(0, 10)
     NotificationCorner.Parent = NotificationFrame
+    
+    -- Gradient effect
+    local UIGradient = Instance.new("UIGradient")
+    UIGradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Library.Theme.Accent),
+        ColorSequenceKeypoint.new(1, Library.Theme.Secondary)
+    }
+    UIGradient.Rotation = 45
+    UIGradient.Parent = NotificationFrame
     
     local NotificationLabel = Instance.new("TextLabel")
     NotificationLabel.Size = UDim2.new(1, -20, 1, 0)
@@ -616,8 +1048,9 @@ function Library:Notification(text, duration)
     NotificationLabel.Text = text
     NotificationLabel.TextColor3 = Library.Theme.Text
     NotificationLabel.TextSize = 13
-    NotificationLabel.Font = Enum.Font.Gotham
+    NotificationLabel.Font = Enum.Font.GothamMedium
     NotificationLabel.TextXAlignment = Enum.TextXAlignment.Left
+    NotificationLabel.TextTransparency = 1
     NotificationLabel.Parent = NotificationFrame
     
     if game:GetService("CoreGui"):FindFirstChild("InovoProductions") then
@@ -630,19 +1063,46 @@ function Library:Notification(text, duration)
         NotificationFrame.Parent = TempGui
     end
     
+    -- Slide in with elastic bounce
     TweenService:Create(NotificationFrame, Library.Animations.Bounce, {
-        Size = UDim2.new(0, 300, 0, 50)
+        Size = UDim2.new(0, 300, 0, 50),
+        BackgroundTransparency = 0
     }):Play()
+    
+    TweenService:Create(NotificationLabel, Library.Animations.Fast, {
+        TextTransparency = 0
+    }):Play()
+    
+    -- Gradient animation
+    spawn(function()
+        while NotificationFrame.Parent do
+            TweenService:Create(UIGradient, TweenInfo.new(2, Enum.EasingStyle.Linear), {
+                Rotation = UIGradient.Rotation + 360
+            }):Play()
+            wait(2)
+        end
+    end)
     
     wait(duration)
     
-    TweenService:Create(NotificationFrame, Library.Animations.Medium, {
-        Size = UDim2.new(0, 0, 0, 50)
+    -- Smooth slide out
+    TweenService:Create(NotificationFrame, Library.Animations.Silk, {
+        Size = UDim2.new(0, 0, 0, 50),
+        BackgroundTransparency = 1,
+        Position = UDim2.new(1, 50, 1, -70)
     }):Play()
     
-    wait(0.3)
+    TweenService:Create(NotificationLabel, Library.Animations.Fast, {
+        TextTransparency = 1
+    }):Play()
+    
+    wait(0.4)
     NotificationFrame:Destroy()
 end
+
+-- Mark library as loaded
+getgenv().InovoLibraryLoaded = true
+getgenv().InovoLibrary = Library
 
 return Library
 

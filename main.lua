@@ -7,8 +7,11 @@
     Smooth animations and modern design
 ]]
 
--- Load UI Library
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/lollakillah/lua/main/UI_Library.lua"))()
+-- Check if UI Library is already loaded
+local Library = getgenv().InovoLibrary
+if not Library then
+    Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/lollakillah/lua/main/UI_Library.lua"))()
+end
 
 -- Create Main Window
 local Window = Library:CreateWindow({
