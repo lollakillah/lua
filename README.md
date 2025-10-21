@@ -1,240 +1,272 @@
-# 🚀 Inovoproductions - Roblox Script Hub
+# InovoProductions Script Hub
 
-Een moderne en krachtige Roblox script hub met een strakke interface geïnspireerd op vansirius.menu. Gemaakt met smooth animaties en een intuïtieve gebruikerservaring.
+A modern, sleek Roblox script executor with beautiful animations and advanced features. Built with HTML, CSS, and JavaScript for a smooth, responsive experience.
+
+![Script Hub Preview](https://img.shields.io/badge/Status-Ready-brightgreen)
+![Version](https://img.shields.io/badge/Version-1.0.0-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ## ✨ Features
 
-### 🎨 Modern Design
-- Smooth animaties en transitions
-- Dark theme met paarse accenten
-- Volledig responsieve interface
-- Drag-and-drop venster
-- Minimaliseer functionaliteit
+### 🎨 Modern UI Design
+- **Smooth Animations**: Beautiful transitions and hover effects
+- **Multiple Themes**: Dark, Light, Purple, and Blue themes
+- **Responsive Design**: Works perfectly on all screen sizes
+- **Particle Effects**: Animated background particles
+- **Glass Morphism**: Modern glass-like design elements
 
-### 📦 Functies
+### 🚀 Advanced Functionality
+- **Multi-Language Support**: Lua and JavaScript execution
+- **Script Validation**: Syntax checking and error detection
+- **Auto-Save**: Automatically saves your scripts
+- **Hotkeys**: Keyboard shortcuts for quick actions
+- **Search & Filter**: Find scripts quickly
+- **Script Templates**: Pre-built scripts ready to use
 
-#### 🏠 Home Tab
-- Welkomstbericht
-- Update checker
-- Discord link
+### 🔒 Security Features
+- **Script Sanitization**: Removes potentially dangerous code
+- **Safe Execution**: Sandboxed environment for script execution
+- **Security Warnings**: Alerts for potentially unsafe operations
+- **Validation Engine**: Comprehensive script validation
 
-#### 🌐 Universal Scripts
-- **Infinite Yield** - Krachtige command-line admin tool
-- **Dex Explorer V4** - Game explorer
-- **Simple Spy** - Remote spy tool
-- **Unnamed ESP** - Player ESP
-- **FPS Booster** - Verbeter je performance
-- **Anti-AFK** - Blijf online
+### 📱 User Experience
+- **Intuitive Interface**: Easy-to-use design inspired by modern applications
+- **Smooth Performance**: Optimized for 60fps animations
+- **Accessibility**: Keyboard navigation and screen reader support
+- **Customizable**: Personalize your experience with themes and settings
 
-#### 👤 Player Tab
-- **WalkSpeed slider** - Pas je loop snelheid aan (16-200)
-- **JumpPower slider** - Pas je spring kracht aan (50-300)
-- **Loop WalkSpeed** - Blijf je snelheid behouden
-- **Loop JumpPower** - Blijf je spring kracht behouden
-- **Infinite Jump** - Spring oneindig
-- **God Mode (FE)** - Onsterfelijkheid
-- **Noclip** - Loop door muren (Toggle met N)
+## 🖼️ Screenshots
 
-#### 🎮 Game Scripts
-- Auto game detectie
-- Aangepaste scripts voor populaire games:
-  - Blox Fruits
-  - Arsenal
-  - Brookhaven
-  - Adopt Me
-  - En meer...
+### Main Interface
+![Main Interface](https://via.placeholder.com/800x500/1a1a1a/ffffff?text=InovoProductions+Script+Hub)
 
-#### ⚡ Executor
-- Ingebouwde script executor
-- Voer custom Lua scripts uit
-- Clipboard support
-- Script opslag
+### Script Executor
+![Script Executor](https://via.placeholder.com/800x500/2a2a2a/ffffff?text=Script+Executor+with+Syntax+Highlighting)
 
-#### ⚙️ Settings
-- Auto-Execute bij join
-- Notificatie instellingen
-- Rejoin server
-- Server hop
-- Game ID tools
+### Settings Panel
+![Settings](https://via.placeholder.com/800x500/3a3a3a/ffffff?text=Settings+and+Customization)
 
-## 🚀 Installatie
+## 🚀 Quick Start
 
-### Methode 1: Direct laden (Aanbevolen)
-```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/YOUR_GITHUB/loader.lua"))()
-```
+### Installation
 
-### Methode 2: Via executor
-1. Download `loader.lua`
-2. Open je Roblox executor
-3. Plak de inhoud van `loader.lua`
-4. Klik op Execute
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/InovoProductions/script-hub.git
+   cd script-hub
+   ```
 
-### Methode 3: Lokale bestanden
-1. Download alle bestanden
-2. Plaats ze in je executor's workspace folder
-3. Voer `loader.lua` uit
+2. **Open in browser**
+   ```bash
+   # Simply open index.html in your web browser
+   open index.html
+   ```
 
-## 📁 Bestandsstructuur
+3. **Or use a local server**
+   ```bash
+   # Using Python
+   python -m http.server 8000
+   
+   # Using Node.js
+   npx serve .
+   
+   # Using PHP
+   php -S localhost:8000
+   ```
 
-```
-Inovoproductions/
-│
-├── UI_Library.lua      # UI Library met animaties en componenten
-├── main.lua            # Hoofd script hub interface
-├── loader.lua          # Snelle loader met loading screen
-└── README.md           # Deze documentatie
-```
+### Usage
 
-## 🎨 UI Componenten
+1. **Navigate to Scripts tab** - Browse pre-built scripts
+2. **Click on a script** - Automatically loads into the executor
+3. **Switch to Executor tab** - Edit and customize your script
+4. **Press Execute** - Run your script (Ctrl + Enter)
+5. **Customize settings** - Adjust themes and preferences
 
-De UI Library bevat verschillende componenten:
+## 📋 Available Scripts
 
-### Buttons
-```lua
-Tab:AddButton("Button Text", function()
-    print("Button clicked!")
-end)
-```
+### 🎯 ESP Scripts
+- **Basic ESP**: Player visibility enhancement
+- **Advanced ESP**: Customizable colors and features
+- **Health ESP**: Display player health bars
 
-### Toggles
-```lua
-Tab:AddToggle("Toggle Text", false, function(state)
-    print("Toggle state:", state)
-end)
-```
+### 🏃 Movement Scripts
+- **Speed Hack**: Increase walking/running speed
+- **Fly Script**: Enable flying mode with smooth controls
+- **Noclip**: Walk through walls and objects
+- **Teleport**: Quick teleportation to players/locations
 
-### Sliders
-```lua
-Tab:AddSlider("Slider Text", min, max, default, function(value)
-    print("Slider value:", value)
-end)
-```
+### 🤖 Automation Scripts
+- **Auto Farm**: Automated resource gathering
+- **Auto Click**: Automated clicking functionality
+- **Auto Collect**: Automatic item collection
 
-### Textboxes
-```lua
-Tab:AddTextbox("Label", "Placeholder", function(text)
-    print("Input:", text)
-end)
-```
+### 🎮 Utility Scripts
+- **God Mode**: Invincibility toggle
+- **Infinite Jump**: Unlimited jumping
+- **Camera Scripts**: Enhanced camera controls
+- **UI Modifications**: Custom interface changes
 
-### Notifications
-```lua
-Library:Notification("Notification text", duration)
-```
+## ⌨️ Keyboard Shortcuts
 
-## 🎨 Theme Kleuren
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl + Enter` | Execute script |
+| `Ctrl + Shift + C` | Clear editor |
+| `Escape` | Close modal |
+| `F` | Toggle fly mode |
+| `N` | Toggle noclip |
+| `B` | Toggle auto farm |
 
-```lua
-Background = Color3.fromRGB(15, 15, 20)      -- Donker zwart
-Secondary = Color3.fromRGB(25, 25, 35)       -- Lichter zwart
-Accent = Color3.fromRGB(138, 43, 226)        -- Paars
-AccentHover = Color3.fromRGB(158, 63, 246)   -- Licht paars
-Text = Color3.fromRGB(255, 255, 255)         -- Wit
-TextDark = Color3.fromRGB(150, 150, 160)     -- Grijs
-Success = Color3.fromRGB(75, 210, 143)       -- Groen
-Error = Color3.fromRGB(234, 84, 85)          -- Rood
-Border = Color3.fromRGB(40, 40, 50)          -- Donker grijs
-```
+## 🎨 Themes
 
-## 🔧 Custom Scripts Toevoegen
+### Dark Theme (Default)
+- Modern dark interface
+- Easy on the eyes
+- Professional appearance
 
-Je kunt gemakkelijk je eigen scripts toevoegen:
+### Light Theme
+- Clean white interface
+- High contrast
+- Perfect for daytime use
 
-```lua
--- In main.lua
-local CustomTab = Window:CreateTab("🔥 Custom")
+### Purple Theme
+- Vibrant purple accents
+- Modern gradient effects
+- Eye-catching design
 
-CustomTab:AddButton("Mijn Script", function()
-    Library:Notification("Laden...", 2)
-    loadstring(game:HttpGet("YOUR_SCRIPT_URL"))()
-end)
-```
+### Blue Theme
+- Calming blue tones
+- Professional look
+- Great for extended use
+
+## 🔧 Configuration
+
+### Settings Panel
+- **Theme Selection**: Choose your preferred color scheme
+- **Hotkey Customization**: Modify keyboard shortcuts
+- **Security Options**: Adjust safety settings
+- **Auto-execution**: Enable/disable automatic script running
+
+### Advanced Options
+- **Script Validation**: Toggle syntax checking
+- **Security Warnings**: Enable/disable safety alerts
+- **Auto-save**: Automatic script saving
+- **Performance Mode**: Optimize for lower-end devices
 
 ## 🛠️ Development
 
-### Vereisten
-- Roblox Executor (Synapse X, KRNL, Fluxus, etc.)
-- Basis kennis van Lua
-
-### Eigen UI maken
-```lua
-local Library = loadstring(game:HttpGet("YOUR_UI_LIBRARY_URL"))()
-
-local Window = Library:CreateWindow({
-    Title = "Jouw Hub Naam"
-})
-
-local Tab = Window:CreateTab("Tab Naam")
-
-Tab:AddButton("Button", function()
-    print("Hallo wereld!")
-end)
+### Project Structure
+```
+script-hub/
+├── index.html              # Main HTML file
+├── styles.css              # CSS styles and animations
+├── script.js               # Main JavaScript functionality
+├── roblox-integration.js    # Roblox-specific features
+├── README.md               # Project documentation
+└── assets/                 # Additional resources
+    ├── icons/              # Icon files
+    └── images/             # Screenshots and graphics
 ```
 
-## 🔐 Beveiliging
+### Technologies Used
+- **HTML5**: Semantic markup and structure
+- **CSS3**: Modern styling with animations
+- **JavaScript ES6+**: Modern JavaScript features
+- **Font Awesome**: Icon library
+- **Google Fonts**: Inter font family
 
-- Alle scripts worden lokaal uitgevoerd
-- Geen data wordt verzonden naar externe servers
-- Open source - bekijk de code zelf!
-
-## 📱 Compatibiliteit
-
-### Executors
-✅ Synapse X  
-✅ KRNL  
-✅ Fluxus  
-✅ Electron  
-✅ Script-Ware  
-✅ En de meeste andere executors
-
-### Roblox
-✅ Windows  
-✅ Mac (met compatibele executor)  
-
-## ⚠️ Disclaimer
-
-Dit script is alleen voor educatieve doeleinden. Het gebruik van executors en scripts kan tegen de Roblox Terms of Service zijn. Gebruik op eigen risico.
+### Browser Support
+- ✅ Chrome 80+
+- ✅ Firefox 75+
+- ✅ Safari 13+
+- ✅ Edge 80+
 
 ## 🤝 Contributing
 
-Wil je bijdragen? Geweldig!
+We welcome contributions! Please follow these steps:
 
-1. Fork het project
-2. Maak een feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit je changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push naar de branch (`git push origin feature/AmazingFeature`)
-5. Open een Pull Request
+1. **Fork the repository**
+2. **Create a feature branch**
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
+3. **Commit your changes**
+   ```bash
+   git commit -m 'Add amazing feature'
+   ```
+4. **Push to the branch**
+   ```bash
+   git push origin feature/amazing-feature
+   ```
+5. **Open a Pull Request**
 
-## 📞 Contact & Support
+### Contribution Guidelines
+- Follow the existing code style
+- Add comments for complex functionality
+- Test your changes thoroughly
+- Update documentation as needed
 
-- **Discord:** discord.gg/inovoproductions
-- **YouTube:** youtube.com/@inovoproductions
-- **GitHub Issues:** Voor bug reports en feature requests
+## 📝 License
 
-## 📄 Licentie
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Dit project is open source en beschikbaar onder de MIT License.
+## 👥 Team
 
-## 🌟 Credits
+**InovoProductions**
+- **Lead Developer**: [Your Name]
+- **UI/UX Designer**: [Designer Name]
+- **Security Advisor**: [Security Expert]
 
-- **Ontwikkeld door:** Inovoproductions
-- **Geïnspireerd door:** vansirius.menu
-- **UI Design:** Modern & Minimalistisch
-- **Animaties:** Smooth & Professioneel
+## 🙏 Acknowledgments
 
-## 📊 Versie History
+- **Roblox Community** - For inspiration and feedback
+- **Open Source Contributors** - For various libraries and tools
+- **Beta Testers** - For valuable feedback and bug reports
 
-### v1.0 (Huidig)
-- ✨ Initiële release
-- 🎨 Moderne UI met smooth animaties
-- 🚀 6 Hoofdtabs (Home, Universal, Player, Game Scripts, Executor, Settings)
-- 🔧 20+ Ingebouwde functies
-- 🎮 Game-specifieke script detectie
+## 📞 Support
+
+### Getting Help
+- **GitHub Issues**: Report bugs and request features
+- **Discord Server**: Join our community for support
+- **Email**: contact@inovoproductions.com
+
+### Reporting Issues
+When reporting issues, please include:
+- Browser version and OS
+- Steps to reproduce
+- Expected vs actual behavior
+- Screenshots if applicable
+
+## 🔮 Roadmap
+
+### Version 1.1.0
+- [ ] Plugin system for custom scripts
+- [ ] Advanced script editor with syntax highlighting
+- [ ] Script sharing and community features
+- [ ] Performance optimizations
+
+### Version 1.2.0
+- [ ] Mobile app version
+- [ ] Cloud sync for scripts
+- [ ] Advanced debugging tools
+- [ ] Script marketplace
+
+### Version 2.0.0
+- [ ] Complete rewrite with modern framework
+- [ ] Real-time collaboration
+- [ ] Advanced AI-powered script generation
+- [ ] Enterprise features
+
+## ⚠️ Disclaimer
+
+This tool is for educational and development purposes only. Users are responsible for complying with Roblox's Terms of Service and applicable laws. The developers are not responsible for any misuse of this software.
+
+## 🌟 Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=InovoProductions/script-hub&type=Date)](https://star-history.com/#InovoProductions/script-hub&Date)
 
 ---
 
-**Gemaakt met ❤️ door Inovoproductions**
+**Made with ❤️ by InovoProductions**
 
-*Enjoy scripting! 🚀*
-
+*Building the future of Roblox development tools*

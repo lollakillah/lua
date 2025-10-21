@@ -1,0 +1,48 @@
+{
+  "name": "inovoproductions-script-hub",
+  "version": "1.0.0",
+  "description": "A modern, sleek Roblox script executor with beautiful animations and advanced features",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx live-server .",
+    "build": "echo 'No build process needed for static files'",
+    "test": "echo 'No tests specified'",
+    "lint": "echo 'No linting configured'"
+  },
+  "keywords": [
+    "roblox",
+    "script",
+    "executor",
+    "lua",
+    "javascript",
+    "game",
+    "hack",
+    "tool",
+    "modern",
+    "ui",
+    "animations"
+  ],
+  "author": "InovoProductions",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/InovoProductions/script-hub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/InovoProductions/script-hub/issues"
+  },
+  "homepage": "https://github.com/InovoProductions/script-hub#readme",
+  "devDependencies": {
+    "serve": "^14.2.1",
+    "live-server": "^1.2.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

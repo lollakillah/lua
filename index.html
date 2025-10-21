@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InovoProductions Script Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-animation">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-code"></i>
+                <span>InovoProductions</span>
+            </div>
+            <div class="header-controls">
+                <button class="control-btn minimize" onclick="minimizeWindow()">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button class="control-btn close" onclick="closeWindow()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="navigation">
+            <div class="nav-item active" data-tab="scripts">
+                <i class="fas fa-terminal"></i>
+                <span>Scripts</span>
+            </div>
+            <div class="nav-item" data-tab="executor">
+                <i class="fas fa-play"></i>
+                <span>Executor</span>
+            </div>
+            <div class="nav-item" data-tab="settings">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </div>
+            <div class="nav-item" data-tab="about">
+                <i class="fas fa-info-circle"></i>
+                <span>About</span>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Scripts Tab -->
+            <div class="tab-content active" id="scripts">
+                <div class="content-header">
+                    <h2>Script Collection</h2>
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search scripts..." id="scriptSearch">
+                    </div>
+                </div>
+                
+                <div class="scripts-grid" id="scriptsGrid">
+                    <!-- Scripts will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Executor Tab -->
+            <div class="tab-content" id="executor">
+                <div class="content-header">
+                    <h2>Script Executor</h2>
+                    <div class="executor-controls">
+                        <button class="btn btn-primary" onclick="executeScript()">
+                            <i class="fas fa-play"></i>
+                            Execute
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearEditor()">
+                            <i class="fas fa-trash"></i>
+                            Clear
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span>Lua Script Editor</span>
+                        <div class="editor-tabs">
+                            <button class="tab-btn active" data-editor="lua">Lua</button>
+                            <button class="tab-btn" data-editor="js">JavaScript</button>
+                        </div>
+                    </div>
+                    <textarea id="scriptEditor" placeholder="-- Enter your Lua script here...
+-- Example:
+print('Hello from InovoProductions!')
+
+-- Your script goes here..."></textarea>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div class="tab-content" id="settings">
+                <div class="content-header">
+                    <h2>Settings</h2>
+                </div>
+                
+                <div class="settings-grid">
+                    <div class="setting-card">
+                        <div class="setting-header">
+                            <i class="fas fa-palette"></i>
+                            <h3>Theme</h3>
+                        </div>
+                        <div class="setting-content">
+                            <select id="themeSelect">
+                                <option value="dark">Dark Theme</option>
+                                <option value="light">Light Theme</option>
+                                <option value="purple">Purple Theme</option>
+                                <option value="blue">Blue Theme</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="setting-card">
+                        <div class="setting-header">
+                            <i class="fas fa-keyboard"></i>
+                            <h3>Hotkeys</h3>
+                        </div>
+                        <div class="setting-content">
+                            <div class="hotkey-item">
+                                <span>Execute Script</span>
+                                <kbd>Ctrl + Enter</kbd>
+                            </div>
+                            <div class="hotkey-item">
+                                <span>Clear Editor</span>
+                                <kbd>Ctrl + Shift + C</kbd>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-card">
+                        <div class="setting-header">
+                            <i class="fas fa-shield-alt"></i>
+                            <h3>Security</h3>
+                        </div>
+                        <div class="setting-content">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="autoExecute">
+                                <span class="checkmark"></span>
+                                Auto-execute trusted scripts
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="showWarnings">
+                                <span class="checkmark"></span>
+                                Show security warnings
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Tab -->
+            <div class="tab-content" id="about">
+                <div class="content-header">
+                    <h2>About InovoProductions</h2>
+                </div>
+                
+                <div class="about-content">
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>Modern Script Hub</h3>
+                        <p>A sleek and powerful Roblox script executor with modern UI design, smooth animations, and advanced features.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Multi-Language Support</h3>
+                        <p>Support for Lua and JavaScript scripting with syntax highlighting and intelligent code completion.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Secure & Safe</h3>
+                        <p>Built with security in mind, featuring script validation and safe execution environment.</p>
+                    </div>
+
+                    <div class="version-info">
+                        <p><strong>Version:</strong> 1.0.0</p>
+                        <p><strong>Developer:</strong> InovoProductions</p>
+                        <p><strong>License:</strong> MIT</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Status Bar -->
+        <footer class="status-bar">
+            <div class="status-left">
+                <span class="status-indicator online"></span>
+                <span>Ready</span>
+            </div>
+            <div class="status-right">
+                <span id="currentTime"></span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Script Execution Modal -->
+    <div class="modal" id="executionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Script Execution</h3>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="execution-status">
+                    <div class="status-icon">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                    <p>Executing script...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
