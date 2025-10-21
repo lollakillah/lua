@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inovoproductions - Installation Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f14 0%, #1a1a24 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        h1 {
+            font-size: 3em;
+            background: linear-gradient(135deg, #8a2be2, #9e3ff6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #969696;
+            font-size: 1.2em;
+        }
+
+        .card {
+            background: rgba(25, 25, 35, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            animation: fadeInUp 0.8s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.3);
+        }
+
+        h2 {
+            color: #8a2be2;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .code-block {
+            background: #0f0f14;
+            border: 1px solid #282838;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .code-block code {
+            color: #4bf542;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #8a2be2;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: background 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: #9e3ff6;
+        }
+
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature {
+            background: rgba(138, 43, 226, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #8a2be2;
+        }
+
+        .feature h3 {
+            color: #9e3ff6;
+            margin-bottom: 10px;
+        }
+
+        .steps {
+            counter-reset: step-counter;
+            list-style: none;
+        }
+
+        .steps li {
+            counter-increment: step-counter;
+            margin-bottom: 25px;
+            position: relative;
+            padding-left: 50px;
+        }
+
+        .steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(135deg, #8a2be2, #9e3ff6);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .warning {
+            background: rgba(234, 84, 85, 0.1);
+            border-left: 4px solid #ea5455;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .success {
+            background: rgba(75, 210, 143, 0.1);
+            border-left: 4px solid #4bd28f;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #969696;
+            border-top: 1px solid rgba(138, 43, 226, 0.3);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: #8a2be2;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 2px solid #8a2be2;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #8a2be2;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Inovoproductions</h1>
+            <p class="subtitle">Modern Roblox Script Hub - Installation Guide</p>
+        </header>
+
+        <div class="card">
+            <h2>⚡ Quick Load</h2>
+            <p>Kopieer en plak deze code in je Roblox executor:</p>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode('quick-load')">Copy</button>
+                <code id="quick-load">loadstring(game:HttpGet("https://raw.githubusercontent.com/YOUR_GITHUB/loader.lua"))()</code>
+            </div>
+            <div class="success">
+                ✅ Simpel, snel en effectief!
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📋 Stapsgewijze Installatie</h2>
+            <ol class="steps">
+                <li>
+                    <strong>Download een Executor</strong>
+                    <p>Kies een betrouwbare Roblox executor zoals Synapse X, KRNL, of Fluxus</p>
+                </li>
+                <li>
+                    <strong>Open Roblox</strong>
+                    <p>Start het spel waar je de script hub wilt gebruiken</p>
+                </li>
+                <li>
+                    <strong>Inject de Executor</strong>
+                    <p>Open je executor en klik op "Inject" of "Attach"</p>
+                </li>
+                <li>
+                    <strong>Plak de Load Code</strong>
+                    <p>Kopieer de quick load code hierboven en plak deze in je executor</p>
+                </li>
+                <li>
+                    <strong>Execute!</strong>
+                    <p>Klik op "Execute" en geniet van Inovoproductions!</p>
+                </li>
+            </ol>
+        </div>
+
+        <div class="card">
+            <h2>✨ Features</h2>
+            <div class="features">
+                <div class="feature">
+                    <h3>🎨 Modern UI</h3>
+                    <p>Smooth animaties en clean design geïnspireerd op vansirius.menu</p>
+                </div>
+                <div class="feature">
+                    <h3>🌐 Universal Scripts</h3>
+                    <p>Infinite Yield, Dex Explorer, ESP en meer</p>
+                </div>
+                <div class="feature">
+                    <h3>👤 Player Mods</h3>
+                    <p>WalkSpeed, JumpPower, God Mode, Noclip</p>
+                </div>
+                <div class="feature">
+                    <h3>🎮 Game Scripts</h3>
+                    <p>Auto-detectie voor populaire games</p>
+                </div>
+                <div class="feature">
+                    <h3>⚡ Built-in Executor</h3>
+                    <p>Voer custom scripts direct uit</p>
+                </div>
+                <div class="feature">
+                    <h3>⚙️ Geavanceerde Settings</h3>
+                    <p>Server hop, rejoin, en meer</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🔧 Alternatieve Load Methods</h2>
+            
+            <h3>Methode 2: Direct Main Script</h3>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode('method2')">Copy</button>
+                <code id="method2">loadstring(game:HttpGet("https://raw.githubusercontent.com/YOUR_GITHUB/main.lua"))()</code>
+            </div>
+
+            <h3>Methode 3: Lokale Bestanden</h3>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode('method3')">Copy</button>
+                <code id="method3">loadstring(readfile("loader.lua"))()</code>
+            </div>
+            <p><em>Let op: Deze methode vereist dat je de bestanden in je executor workspace hebt opgeslagen</em></p>
+        </div>
+
+        <div class="card">
+            <h2>⚠️ Disclaimer</h2>
+            <div class="warning">
+                <strong>Belangrijk:</strong> Het gebruik van executors en scripts kan tegen de Roblox Terms of Service zijn. 
+                Gebruik dit alleen voor educatieve doeleinden en op eigen risico. Wij zijn niet verantwoordelijk voor 
+                account bans of andere consequenties.
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🛠️ Troubleshooting</h2>
+            <h3>Script laadt niet?</h3>
+            <ul>
+                <li>✓ Controleer of HTTP requests enabled zijn in je executor</li>
+                <li>✓ Zorg dat je de executor correct hebt ge-inject</li>
+                <li>✓ Probeer een andere executor</li>
+            </ul>
+
+            <h3>Errors in console?</h3>
+            <ul>
+                <li>✓ Update je executor naar de nieuwste versie</li>
+                <li>✓ Controleer je internet verbinding</li>
+                <li>✓ Probeer het script opnieuw te laden</li>
+            </ul>
+
+            <h3>Features werken niet?</h3>
+            <ul>
+                <li>✓ Sommige games hebben anti-cheat bescherming</li>
+                <li>✓ Probeer verschillende features</li>
+                <li>✓ Check of je executor alle Roblox functies ondersteunt</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>Gemaakt met ❤️ door <strong>Inovoproductions</strong></p>
+            <p>Versie 1.0 | 2025</p>
+            <div class="social-links">
+                <a href="#" onclick="copyToClipboard('discord.gg/inovoproductions')">Discord</a>
+                <a href="#" onclick="copyToClipboard('youtube.com/@inovoproductions')">YouTube</a>
+                <a href="#">GitHub</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function copyCode(elementId) {
+            const code = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                btn.style.background = '#4bd28f';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '#8a2be2';
+                }, 2000);
+            });
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Link gekopieerd naar clipboard: ' + text);
+            });
+            return false;
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

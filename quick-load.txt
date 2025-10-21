@@ -1,0 +1,54 @@
+========================================
+INOVOPRODUCTIONS - QUICK LOAD GUIDE
+========================================
+
+📋 COPY & PASTE DEZE CODE IN JE EXECUTOR:
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/YOUR_GITHUB/loader.lua"))()
+
+
+⚡ ALTERNATIEVE LOAD METHODS:
+
+1. Direct Main Script (Zonder loader):
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/YOUR_GITHUB/main.lua"))()
+
+2. Met Custom UI Library Path:
+   loadstring(game:HttpGet("YOUR_CUSTOM_PATH/main.lua"))()
+
+
+🔧 LOKALE BESTANDEN GEBRUIKEN:
+
+Als je de bestanden lokaal hebt opgeslagen in je executor workspace:
+
+   loadstring(readfile("loader.lua"))()
+
+
+💡 TIPS:
+
+• Gebruik een goede executor (Synapse X, KRNL, Fluxus)
+• Zorg dat HTTP requests enabled zijn in je executor
+• Bij problemen: check of alle URLs correct zijn
+
+
+⚙️ TROUBLESHOOTING:
+
+Probleem: "loadstring is not available"
+Oplossing: Je executor ondersteunt geen loadstring, probeer een andere
+
+Probleem: "HTTP 404"
+Oplossing: Update de GitHub URLs naar je eigen repository
+
+Probleem: "Attempt to index nil"
+Oplossing: Zorg dat UI_Library.lua correct geladen is
+
+
+📱 SUPPORT:
+
+Discord: discord.gg/inovoproductions
+YouTube: youtube.com/@inovoproductions
+
+
+========================================
+Enjoy Inovoproductions! 🚀
+========================================
+
