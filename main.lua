@@ -8,7 +8,7 @@
 ]]
 
 -- Load UI Library
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/YOUR_GITHUB/UI_Library.lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/lollakillah/lua/main/UI_Library.lua"))()
 
 -- Create Main Window
 local Window = Library:CreateWindow({

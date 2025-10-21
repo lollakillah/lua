@@ -74,7 +74,7 @@ updateProgress(0.2, "Loading UI Library...")
 wait(0.5)
 
 local success, Library = pcall(function()
-    return loadstring(game:HttpGet("https://raw.githubusercontent.com/YOUR_GITHUB/UI_Library.lua"))()
+    return loadstring(game:HttpGet("https://raw.githubusercontent.com/lollakillah/lua/main/UI_Library.lua"))()
 end)
 
 if not success then
@@ -90,7 +90,7 @@ updateProgress(0.8, "Loading main script...")
 wait(0.5)
 
 local mainSuccess = pcall(function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/YOUR_GITHUB/main.lua"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/lollakillah/lua/main/main.lua"))()
 end)
 
 if not mainSuccess then

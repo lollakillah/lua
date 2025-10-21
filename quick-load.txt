@@ -4,16 +4,16 @@ INOVOPRODUCTIONS - QUICK LOAD GUIDE
 
 📋 COPY & PASTE DEZE CODE IN JE EXECUTOR:
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/YOUR_GITHUB/loader.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/lollakillah/lua/main/loader.lua"))()
 
 
 ⚡ ALTERNATIEVE LOAD METHODS:
 
 1. Direct Main Script (Zonder loader):
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/YOUR_GITHUB/main.lua"))()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/lollakillah/lua/main/main.lua"))()
 
-2. Met Custom UI Library Path:
-   loadstring(game:HttpGet("YOUR_CUSTOM_PATH/main.lua"))()
+2. Alleen UI Library:
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/lollakillah/lua/main/UI_Library.lua"))()
 
 
 🔧 LOKALE BESTANDEN GEBRUIKEN:

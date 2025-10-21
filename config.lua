@@ -55,12 +55,12 @@ return {
     
     -- Script URLs (Update deze met je eigen GitHub repository)
     URLs = {
-        UILibrary = "https://raw.githubusercontent.com/YOUR_GITHUB/UI_Library.lua",
-        MainScript = "https://raw.githubusercontent.com/YOUR_GITHUB/main.lua",
-        Loader = "https://raw.githubusercontent.com/YOUR_GITHUB/loader.lua",
+        UILibrary = "https://raw.githubusercontent.com/lollakillah/lua/main/UI_Library.lua",
+        MainScript = "https://raw.githubusercontent.com/lollakillah/lua/main/main.lua",
+        Loader = "https://raw.githubusercontent.com/lollakillah/lua/main/loader.lua",
         
         -- Update check
-        VersionCheck = "https://raw.githubusercontent.com/YOUR_GITHUB/version.txt",
+        VersionCheck = "https://raw.githubusercontent.com/lollakillah/lua/main/version.txt",
     },
     
     -- Version Info
@@ -76,7 +76,7 @@ return {
     Social = {
         Discord = "https://discord.gg/inovoproductions",
         YouTube = "https://youtube.com/@inovoproductions",
-        GitHub = "https://github.com/YOUR_USERNAME",
+        GitHub = "https://github.com/lollakillah/lua",
         Website = "https://inovoproductions.com"
     },
     
